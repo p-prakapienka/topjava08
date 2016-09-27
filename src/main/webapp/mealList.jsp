@@ -19,6 +19,21 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>Meal list</h3>
+    <form action="meals?action=filter" method="get">
+        <label>Start date:
+            <input type="date" name="startDate"/>
+        </label>
+        <label>End date:
+            <input type="date" name="endDate"/>
+        </label>
+        <label>Start time:
+            <input type="time" name="startTime"/>
+        </label>
+        <label>End time:
+            <input type="time" name="endTime"/>
+        </label>
+        <input type="submit" value="Filter">
+    </form>
     <a href="meals?action=create">Add Meal</a>
     <hr>
     <table border="1" cellpadding="8" cellspacing="0">

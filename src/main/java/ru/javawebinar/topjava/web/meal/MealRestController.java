@@ -41,7 +41,7 @@ public class MealRestController {
         return service.getAll(AuthorizedUser.id());
     }
 
-    public List<MealWithExceed> getBetween() {
-        return service.getBetween(AuthorizedUser.id(), LocalDateTime.of(2015, Month.MAY, 31, 0, 0), LocalDateTime.of(2015, Month.MAY, 31, 23, 0));
+    public List<MealWithExceed> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return service.getBetween(AuthorizedUser.id(), startDateTime, endDateTime);
     }
 }
