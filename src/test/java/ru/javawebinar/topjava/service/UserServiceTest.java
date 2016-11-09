@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
@@ -59,6 +60,12 @@ public abstract class UserServiceTest extends AbstractServiceTest {
     public void testGet() throws Exception {
         User user = service.get(USER_ID);
         MATCHER.assertEquals(USER, user);
+    }
+
+    @Test
+    public void testGetWithMeals() throws Exception {
+        User user = service.getWithMeals(USER_ID);
+        MealTestData.MATCHER.assertCollectionEquals(user.getMeals(), MealTestData.MEALS);
     }
 
     @Test(expected = NotFoundException.class)

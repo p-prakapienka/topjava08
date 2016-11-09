@@ -54,6 +54,11 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
+    public Meal getWithUser(int id, int userId) {
+        return null;
+    }
+
+    @Override
     public Collection<Meal> getAll(int userId) {
         return getAllStream(userId).collect(Collectors.toList());
     }

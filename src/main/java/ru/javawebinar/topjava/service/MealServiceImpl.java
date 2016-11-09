@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -23,6 +24,11 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal get(int id, int userId) {
         return ExceptionUtil.checkNotFoundWithId(repository.get(id, userId), id);
+    }
+
+    @Override
+    public Meal getWithUser(int id, int userId) throws NotFoundException {
+        return ExceptionUtil.checkNotFoundWithId(repository.getWithUser(id, userId), id);
     }
 
     @Override
