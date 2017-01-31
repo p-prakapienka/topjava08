@@ -4,15 +4,15 @@
 <html>
 <head>
     <title>Meal</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
 <section>
-    <h2><a href="index.html">Home</a></h2>
-    <h3>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h3>
+    <h2><a href="${pageContext.request.contextPath}/">Home</a></h2>
+    <h3>${action}</h3>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
-    <form method="post" action="meals">
+    <form method="post" action="save">
         <input type="hidden" name="id" value="${meal.id}">
         <dl>
             <dt>DateTime:</dt>
