@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getWithRoles(int id) throws NotFoundException {
+        return ExceptionUtil.checkNotFoundWithId(repository.getWithRoles(id), id);
+    }
+
+    @Override
     public User getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return ExceptionUtil.checkNotFound(repository.getByEmail(email), "email=" + email);
