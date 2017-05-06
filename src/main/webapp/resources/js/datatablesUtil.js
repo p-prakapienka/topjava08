@@ -1,3 +1,5 @@
+var filtered = false;
+
 function makeEditable() {
     $('.delete').click(function () {
         deleteRow($(this).attr("id"));
@@ -18,6 +20,18 @@ function add() {
     $('#editRow').modal();
 }
 
+function filter() {
+    filtered = true;
+    $.ajax({
+        url: ajaxUrl + 'filter',
+        type: 'GET',
+        data: filterForm.serialize(),
+        success: function (data) {
+            fillTable(data);
+        }
+    });
+}
+
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
@@ -30,13 +44,19 @@ function deleteRow(id) {
 }
 
 function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        datatableApi.fnClearTable();
-        $.each(data, function (key, item) {
-            datatableApi.fnAddData(item);
-        });
-        datatableApi.fnDraw();
+    if (filtered) {
+        filter();
+        return;
+    }
+    $.get(ajaxUrl, fillTable(data));
+}
+
+function fillTable(data) {
+    datatableApi.fnClearTable();
+    $.each(data, function (key, item) {
+        datatableApi.fnAddData(item);
     });
+    datatableApi.fnDraw();
 }
 
 function save() {

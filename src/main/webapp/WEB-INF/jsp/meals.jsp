@@ -16,77 +16,79 @@
 
             <div class="view-box">
 
-            <form class="form-horizontal" method="post" action="meals/filter">
-                <div class="row">
-                    <div class="form-group">
-                        <label for="startDate" class="control-label col-xs-3">Start date</label>
+                <form class="form-horizontal" id="filterForm" method="get">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="startDate" class="control-label col-xs-3">Start date</label>
 
-                        <div class="col-xs-3">
-                            <input class="form-control" type="date" id="startDate" name="startDate" value="${param.startDate}">
+                            <div class="col-xs-3">
+                                <input class="form-control" type="date" id="startDate" name="startDate" value="${param.startDate}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endDate" class="control-label col-xs-3">End date</label>
+                            <div class="col-xs-3">
+                                <input class="form-control" type="date" id="endDate" name="endDate" value="${param.endDate}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="startTime" class="control-label col-xs-3">Start time</label>
+
+                            <div class="col-xs-3">
+                                <input class="form-control" type="time" id="startTime" name="startTime" value="${param.startTime}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endTime" class="control-label col-xs-3">End time</label>
+
+                            <div class="col-xs-3">
+                                <input class="form-control" type="time" id="endTime" name="endTime" value="${param.endTime}">
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="endDate" class="control-label col-xs-3">End date</label>
-                        <div class="col-xs-3">
-                            <input class="form-control" type="date" id="endDate" name="endDate" value="${param.endDate}">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button type="submit" class="btn btn-sm btn-info"><fmt:message key="meals.filter"/></button>
                         </div>
                     </div>
-                </div>
+                </form>
+            </div>
 
-                <div class="row">
-                    <div class="form-group">
-                        <label for="startTime" class="control-label col-xs-3">Start time</label>
-
-                        <div class="col-xs-3">
-                            <input class="form-control" type="time" id="startTime" name="startTime" value="${param.startTime}">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="endTime" class="control-label col-xs-3">End time</label>
-
-                        <div class="col-xs-3">
-                            <input class="form-control" type="time" id="endTime" name="endTime" value="${param.endTime}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-offset-3 col-xs-9">
-                        <button type="submit" class="btn btn-sm btn-info"><fmt:message key="meals.filter"/></button>
-                    </div>
-                </div>
-            </form>
-
-            <hr>
-            <a class="btn btn-sm btn-info" onclick="add();"><fmt:message key="meals.add"/></a>
-            <hr>
-            <table class="table table-striped display" id="datatable">
-                <thead>
-                <tr>
-                    <th><fmt:message key="meals.dateTime"/></th>
-                    <th><fmt:message key="meals.description"/></th>
-                    <th><fmt:message key="meals.calories"/></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <c:forEach items="${meals}" var="meal">
-                    <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>
-                    <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
-                        <td>
-                                <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
-                                <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
-                                ${fn:formatDateTime(meal.dateTime)}
-                        </td>
-                        <td>${meal.description}</td>
-                        <td>${meal.calories}</td>
-                        <td><a class="btn btn-xs btn-primary edit" id="${meal.id}"><fmt:message key="common.update"/></a></td>
-                        <td><a class="btn btn-xs btn-danger delete" id="${meal.id}"><fmt:message key="common.delete"/></a></td>
+            <div class="view-box">
+                <hr>
+                <a class="btn btn-sm btn-info" onclick="add();"><fmt:message key="meals.add"/></a>
+                <hr>
+                <table class="table table-striped display" id="datatable">
+                    <thead>
+                    <tr>
+                        <th><fmt:message key="meals.dateTime"/></th>
+                        <th><fmt:message key="meals.description"/></th>
+                        <th><fmt:message key="meals.calories"/></th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                </c:forEach>
-            </table>
+                    </thead>
+                    <c:forEach items="${meals}" var="meal">
+                        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>
+                        <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
+                            <td>
+                                    <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+                                    <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
+                                    ${fn:formatDateTime(meal.dateTime)}
+                            </td>
+                            <td>${meal.description}</td>
+                            <td>${meal.calories}</td>
+                            <td><a class="btn btn-xs btn-primary edit" id="${meal.id}"><fmt:message key="common.update"/></a></td>
+                            <td><a class="btn btn-xs btn-danger delete" id="${meal.id}"><fmt:message key="common.delete"/></a></td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
     </div>
@@ -147,8 +149,13 @@
 
     var ajaxUrl = 'ajax/profile/meals/';
     var datatableApi;
+    var filterForm;
 
     $(function () {
+        filterForm = $('#filterForm').submit(function () {
+            filter();
+            return false;
+        });
         datatableApi = $("#datatable").dataTable({
             "bPaginate": false,
             "bInfo": false,
