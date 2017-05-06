@@ -2,7 +2,7 @@ var filtered = false;
 
 function makeEditable() {
     $('.delete').click(function () {
-        deleteRow($(this).attr("id"));
+        deleteRow($(this).parent().parent().attr("id"));
     });
 
     $('#detailsForm').submit(function () {
@@ -48,7 +48,9 @@ function updateTable() {
         filter();
         return;
     }
-    $.get(ajaxUrl, fillTable(data));
+    $.get(ajaxUrl, function (data) {
+        fillTable(data);
+    });
 }
 
 function fillTable(data) {
