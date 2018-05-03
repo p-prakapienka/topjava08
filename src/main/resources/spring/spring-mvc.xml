@@ -10,6 +10,10 @@
 
     <bean class="ru.javawebinar.topjava.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
     <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
     <mvc:default-servlet-handler/>
 
@@ -72,5 +76,6 @@
 
     <mvc:interceptors>
         <bean class="ru.javawebinar.topjava.web.interceptor.ModelInterceptor"/>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
 </beans>
