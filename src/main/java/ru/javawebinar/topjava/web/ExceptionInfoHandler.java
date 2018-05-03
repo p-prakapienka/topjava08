@@ -44,6 +44,9 @@ public class ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
+        if (e.getMessage().contains("users_unique_email_idx")) {
+            e = new DataIntegrityViolationException("User with this email already present in application");
+        }
         return logAndGetErrorInfo(req, e, true);
     }
 
