@@ -18,6 +18,10 @@
                     <input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">
                 </sec:authorize>
             </form:form>
+            <select>
+                <option><a href="?locale=en">en</a></option>
+                <option><a href="?locale=ru">ru</a></option>
+            </select>
         </div>
     </div>
 </div>
